@@ -1,8 +1,14 @@
 package com.stackroute.keepnote.service;
 
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.stackroute.keepnote.exception.UserAlreadyExistsException;
 import com.stackroute.keepnote.exception.UserNotFoundException;
 import com.stackroute.keepnote.model.User;
+import com.stackroute.keepnote.repository.UserAutheticationRepository;
 
 /*
 * Service classes are used here to implement additional business logic/validation 
@@ -14,43 +20,55 @@ import com.stackroute.keepnote.model.User;
 * future.
 * */
 
-
-
+@Service
 public class UserAuthenticationServiceImpl implements UserAuthenticationService {
 
-    /*
+	/*
 	 * Autowiring should be implemented for the UserAuthenticationRepository. (Use
 	 * Constructor-based autowiring) Please note that we should not create any
 	 * object using the new keyword.
 	 */
 
+	private final UserAutheticationRepository userAutheticationRepository;
 
+	@Autowired
+	public UserAuthenticationServiceImpl(UserAutheticationRepository userAutheticationRepository) {
+		this.userAutheticationRepository = userAutheticationRepository;
+	}
 
-
-
-     /*
-	 * This method should be used to validate a user using userId and password.
-	 *  Call the corresponding method of Respository interface.
+	/*
+	 * This method should be used to validate a user using userId and password. Call
+	 * the corresponding method of Respository interface.
 	 * 
 	 */
-    @Override
-    public User findByUserIdAndPassword(String userId, String password) throws UserNotFoundException {
+	@Override
+	public User findByUserIdAndPassword(String userId, String password) throws UserNotFoundException {
 
-      
-        return null;
-    }
-
-
-
+		User user = this.userAutheticationRepository.findByUserIdAndUserPassword(userId, password);
+		if (null == user) {
+			throw new UserNotFoundException("user not found exception");
+		}
+		return user;
+	}
 
 	/*
 	 * This method should be used to save a new user.Call the corresponding method
 	 * of Respository interface.
 	 */
 
-    @Override
-    public boolean saveUser(User user) throws UserAlreadyExistsException {
-       
-        return false;
-    }
+	@Override
+	public boolean saveUser(User user) throws UserAlreadyExistsException {
+		try {
+			Optional<User> userExist = Optional.ofNullable(this.userAutheticationRepository.findById(user.getUserId()))
+					.get();
+			if (!userExist.isPresent()) {
+				this.userAutheticationRepository.save(user);
+				return Boolean.TRUE;
+			}else {
+				throw new UserAlreadyExistsException("Cannot Register User");
+			}
+		} catch (Exception e) {
+			throw new UserAlreadyExistsException(e.getMessage());
+		}
+	}
 }

@@ -2,11 +2,15 @@ package com.stackroute.keepnote.model;
 
 import java.util.Date;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 /*
  * Please note that this class is annotated with @Document annotation
  * @Document identifies a domain object to be persisted to MongoDB.
  *  */
 
+@Document
 public class Category {
 
 	/*
@@ -17,49 +21,75 @@ public class Category {
 	 * getters and setters for the fields along with the no-arg , parameterized
 	 * constructor and toString method. The value of categoryCreationDate should not
 	 * be accepted from the user but should be always initialized with the system
-	 * date. 
+	 * date.
 	 */
-	
 
-    public String getId() {
-        return null;
-    }
+	@Id
+	private String categoryId;
+	private String categoryName;
+	private String categoryDescription;
+	private String categoryCreatedBy;
+	private Date categoryCreationDate;
 
-    public void setId(String id) {
-       
-    }
+	public Category() {
+		// Auto-generated constructor stub
+	}
 
-    public String getCategoryName() {
-        return null;
-    }
+	public Category(String categoryId, String categoryName, String categoryDescription, String categoryCreatedBy,
+			Date categoryCreationDate) {
 
-    public void setCategoryName(String categoryName) {
-       
-    }
+		this.categoryId = categoryId;
+		this.categoryName = categoryName;
+		this.categoryDescription = categoryDescription;
+		this.categoryCreatedBy = categoryCreatedBy;
+		this.categoryCreationDate = categoryCreationDate;
+	}
 
-    public String getCategoryDescription() {
-        return null;
-    }
+	public String getId() {
+		return this.categoryId;
+	}
 
-    public void setCategoryDescription(String categoryDescription) {
-      
-    }
+	public void setId(String id) {
+		this.categoryId = id;
+	}
 
-    public String getCategoryCreatedBy() {
-        return null;
-    }
+	public String getCategoryName() {
+		return this.categoryName;
+	}
 
-    public void setCategoryCreatedBy(String categoryCreatedBy) {
-        
-    }
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
 
-    public Date getCategoryCreationDate() {
-        return null;
-    }
+	public String getCategoryDescription() {
+		return this.categoryDescription;
+	}
 
-    public void setCategoryCreationDate(Date categoryCreationDate) {
-       
-    }
+	public void setCategoryDescription(String categoryDescription) {
+		this.categoryDescription = categoryDescription;
+	}
 
+	public String getCategoryCreatedBy() {
+		return this.categoryCreatedBy;
+	}
+
+	public void setCategoryCreatedBy(String categoryCreatedBy) {
+		this.categoryCreatedBy = categoryCreatedBy;
+	}
+
+	public Date getCategoryCreationDate() {
+		return this.categoryCreationDate;
+	}
+
+	public void setCategoryCreationDate(Date categoryCreationDate) {
+		this.categoryCreationDate = categoryCreationDate;
+	}
+
+	@Override
+	public String toString() {
+		return "Category [categoryId=" + categoryId + ", categoryName=" + categoryName + ", categoryDescription="
+				+ categoryDescription + ", categoryCreatedBy=" + categoryCreatedBy + ", categoryCreationDate="
+				+ categoryCreationDate + "]";
+	}
 
 }

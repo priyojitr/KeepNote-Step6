@@ -13,44 +13,70 @@ public class Category {
 	 * always initialized with the system date.
 	 */
 
-    public String getCategoryId() {
-        return null;
-    }
+	private String categoryId;
+	private String categoryName;
+	private String categoryDescription;
+	private String categoryCreatedBy;
+	private Date categoryCreationDate;
 
-    public void setCategoryId(String categoryId) {
-       
-    }
+	public Category() {
+		// Auto-generated constructor stub
+	}
 
-    public String getCategoryName() {
-        return null;
-    }
+	public Category(String categoryId, String categoryName, String categoryDescription, String categoryCreatedBy,
+			Date categoryCreationDate) {
+		this.categoryId = categoryId;
+		this.categoryName = categoryName;
+		this.categoryDescription = categoryDescription;
+		this.categoryCreatedBy = categoryCreatedBy;
+		this.categoryCreationDate = categoryCreationDate;
+	}
 
-    public void setCategoryName(String categoryName) {
-        
-    }
+	public String getCategoryId() {
+		return this.categoryId;
+	}
 
-    public String getCategoryDescription() {
-        return null;
-    }
+	public void setCategoryId(String categoryId) {
+		this.categoryId = categoryId;
+	}
 
-    public void setCategoryDescription(String categoryDescription) {
-      
-    }
+	public String getCategoryName() {
+		return this.categoryName;
+	}
 
-    public String getCategoryCreatedBy() {
-        return null;
-    }
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
 
-    public void setCategoryCreatedBy(String categoryCreatedBy) {
-       
-    }
+	public String getCategoryDescription() {
+		return this.categoryDescription;
+	}
 
-    public Date getCategoryCreationDate() {
-        return null;
-    }
+	public void setCategoryDescription(String categoryDescription) {
+		this.categoryDescription = categoryDescription;
+	}
 
-    public void setCategoryCreationDate(Date categoryCreationDate) {
-      
-    }
+	public String getCategoryCreatedBy() {
+		return this.categoryCreatedBy;
+	}
+
+	public void setCategoryCreatedBy(String categoryCreatedBy) {
+		this.categoryCreatedBy = categoryCreatedBy;
+	}
+
+	public Date getCategoryCreationDate() {
+		return this.categoryCreationDate;
+	}
+
+	public void setCategoryCreationDate(Date categoryCreationDate) {
+		this.categoryCreationDate = categoryCreationDate;
+	}
+
+	@Override
+	public String toString() {
+		return "Category [categoryId=" + categoryId + ", categoryName=" + categoryName + ", categoryDescription="
+				+ categoryDescription + ", categoryCreatedBy=" + categoryCreatedBy + ", categoryCreationDate="
+				+ categoryCreationDate + "]";
+	}
 
 }
